@@ -5,6 +5,10 @@ import bodyParser from 'body-parser';
 import compression from 'compression';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+// Set up env variables
+dotenv.config();
 
 // Create app
 const app = express();
@@ -25,7 +29,7 @@ server.listen(8080, () => {
 });
 
 // Database config
-const MONGO_URL = 'mongodb+srv://rlisciandra:QoffPyYVETmqTWCD@cluster0.xzfbgob.mongodb.net/?retryWrites=true&w=majority';
+const MONGO_URL = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}`;
 
 async function initializeDatabase(): Promise<void> {
     mongoose.connection.on('connected', () => {
