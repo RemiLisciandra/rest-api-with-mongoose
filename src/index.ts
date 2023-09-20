@@ -25,23 +25,27 @@ middlewares.forEach(middleware => app.use(middleware));
 // Server config
 const server = http.createServer(app);
 server.listen(8080, () => {
-    console.log('Server running');
+    console.log('Server : Running');
 });
+
+if (!process.env.MONGO_USERNAME || !process.env.MONGO_PASSWORD || !process.env.MONGO_HOST) {
+    throw new Error("MongoDB : Missing environment variables");
+}
 
 // Database config
 const MONGO_URL = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}`;
 
 async function initializeDatabase(): Promise<void> {
     mongoose.connection.on('connected', () => {
-        console.log('Successfully connected to MongoDB.');
+        console.log('MongoDB : Successfully connected');
     });
     mongoose.connection.on('error', error => {
-        console.error("Mongoose connection error:", error);
+        console.error("MongoDB : Mongoose connection error : ", error);
     });
     await mongoose.connect(MONGO_URL);
 }
 
 // Call the function to establish the connection
 initializeDatabase().catch(error => {
-    console.error("Failed to initialize MongoDB database" + error)
+    console.error("MongoDB : Failed to initialize database : " + error)
 });
