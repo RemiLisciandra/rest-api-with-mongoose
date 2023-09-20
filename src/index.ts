@@ -24,7 +24,8 @@ middlewares.forEach(middleware => app.use(middleware));
 
 // Server config
 const server = http.createServer(app);
-server.listen(8080, () => {
+const port = 8080;
+server.listen(port, () => {
     console.log('Server : Running');
 });
 
