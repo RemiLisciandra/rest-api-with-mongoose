@@ -1,5 +1,5 @@
 import express from "express";
-import {deleteUserById, getUsers, getUserById} from '../database/user';
+import {deleteUserById, getUsers, getUserById, updateUserById} from '../database/user';
 
 // Error codes
 const OK = 200;
@@ -24,16 +24,13 @@ export const updateUser = async (req: express.Request, res: express.Response) =>
             return res.status(BAD_REQUEST).send("SERVER : Required fields are missing");
         }
 
-        const user = await getUserById(id);
+        const updatedUser = await updateUserById(id, {username});
 
-        if (!user) {
+        if (!updatedUser) {
             return res.status(NOT_FOUND).send("SERVER : User not found");
         }
 
-        user.username = username;
-        await user.save();
-
-        return res.status(OK).send(user);
+        return res.status(OK).send(updatedUser);
     } catch (error) {
         console.error(error);
         return res.status(BAD_REQUEST).send("SERVER : Error updating user");

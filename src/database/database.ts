@@ -23,6 +23,5 @@ export async function initializeDatabase(): Promise<void> {
         await mongoose.connect(MONGO_URL);
     } catch (error) {
         console.error('MONGO DB : Failed to connect:', error);
-        throw error;
     }
 }

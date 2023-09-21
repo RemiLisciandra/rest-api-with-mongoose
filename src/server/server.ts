@@ -5,7 +5,7 @@ export function createServer(app: express.Application): http.Server {
     const port = 8080;
     const server = http.createServer(app);
     server.listen(port, () => {
-        console.log(`SERVER : Running on port : ${port}`);
+        console.log(`SERVER : Running on port ${port}`);
     });
     return server;
 }
