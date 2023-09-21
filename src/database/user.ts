@@ -25,4 +25,4 @@ export const createUser = (elements: Record<string, any>) =>
     new UserModel(elements).save().then((user) =>
         user.toObject());
 export const updateUserById = (id: string, values: Record<string, any>) => UserModel.findByIdAndUpdate(id, values);
-export const deleteUserById = (id: string) => UserModel.findOneAndDelete({ _id: id });
+export const deleteUserById = (id: string) => UserModel.findOneAndDelete({_id: id});

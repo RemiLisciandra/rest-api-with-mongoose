@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 
 if (!process.env.SECRET) {
-    throw new Error("SECRET : Missing environment variables");
+    throw new Error("SERVER : Missing environment variables");
 }
 
 const SECRET: string = process.env.SECRET;

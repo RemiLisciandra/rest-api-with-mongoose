@@ -10,6 +10,7 @@ const UNAUTHORIZED = 401;
 const FORBIDDEN = 403;
 const CONFLICT = 409;
 const SERVER_ERROR = 500;
+const SESSION_COOKIE_NAME = 'REMI-AUTH';
 
 export const login = async (req: express.Request, res: express.Response) => {
     try {
@@ -36,7 +37,7 @@ export const login = async (req: express.Request, res: express.Response) => {
         await user.save();
 
         const domain = 'localhost';
-        res.cookie('REMI-AUTH', user.auth.sessionToken, {domain, path: '/'});
+        res.cookie(SESSION_COOKIE_NAME, user.auth.sessionToken, {domain, path: '/'});
 
         return res.status(OK).json(user);
     } catch (error) {
